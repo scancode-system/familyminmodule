@@ -1,0 +1,13 @@
+{
+    "name": "FamilyMin",
+    "alias": "familymin",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\FamilyMin\\Providers\\FamilyMinServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
