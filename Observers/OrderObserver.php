@@ -3,7 +3,9 @@
 namespace Modules\FamilyMin\Observers;
 
 use Modules\Order\Entities\Order;
+use Modules\Order\Entities\Item;
 use Modules\Order\Entities\Status;
+use Modules\Order\Repositories\ItemRepository;
 use Carbon\Carbon;
 use Exception;
 
@@ -22,7 +24,7 @@ class OrderObserver
 	}
 
 	private function checkItem(Item $item){
-		$qtd_min = $item->product->family_min->qtd_min;
+		$min_qty = $item->product->family_min->min_qty;
 		$items = ItemRepository::family($item); 
 
 		$qty = 0;
@@ -30,7 +32,8 @@ class OrderObserver
 			$qty =+ $item->qty;
 		}
 
-		if($qtd_min <= $qty){
+
+		if($min_qty > $qty){
 			throw new Exception('A familia de produtos '.$item->item_product->sku.' não possui a quantidade mínima configurada pelo sistema.');
 		}
 
