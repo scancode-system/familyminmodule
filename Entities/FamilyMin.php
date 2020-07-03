@@ -6,13 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class FamilyMin extends Model
 {
-    protected $fillable = ['min_qty'];
+    protected $fillable = ['product_sku', 'min_qty'];
 
+    /* LOAD */
+    public static function loadBySku($sku)
+    {
+        return self::where('product_sku', $sku)->first();
+    }
 
     /* CREATE */
-    public static function new()
+    public static function createBySku($sku)
     {
-    	return self::create([]);
+    	return self::create(['product_sku' => $sku]);
     }
 
     /* UPDATE */

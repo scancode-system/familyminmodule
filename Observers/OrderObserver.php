@@ -27,11 +27,11 @@ class OrderObserver
 		$min_qty = $item->product->family_min->min_qty;
 		$items = ItemRepository::family($item); 
 
-		$qty = 0;
-		foreach ($items as $item) {
-			$qty =+ $item->qty;
-		}
 
+		$qty = 0;
+		foreach ($items as $family_item) {
+			$qty += $family_item->qty;
+		}
 
 		if($min_qty > $qty){
 			throw new Exception('A familia de produtos '.$item->item_product->sku.' não possui a quantidade mínima configurada pelo sistema.');

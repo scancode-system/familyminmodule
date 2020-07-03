@@ -14,8 +14,10 @@ class AlterProductFamilyMin extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->unsignedBigInteger('family_min_id');
-            $table->foreign('family_min_id')->references('id')->on('products')->onDelete('restrict')->onUpdate('restrict');
+            //$table->unsignedBigInteger('family_min_id');
+            //$table->foreign('family_min_id')->references('id')->on('products')->onDelete('restrict')->onUpdate('restrict');
+
+            $table->foreign('sku')->references('product_sku')->on('family_mins')->onDelete('no action')->onUpdate('no action');
         });
     }
 
@@ -27,8 +29,8 @@ class AlterProductFamilyMin extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign(['family_min_id']);
-            $table->dropColumn('family_min_id');
+            $table->dropForeign(['sku']);
+           // $table->dropColumn('family_min_id');
         });
     }
 }
